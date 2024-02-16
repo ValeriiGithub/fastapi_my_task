@@ -5,7 +5,8 @@ from repository import TaskRepository
 from schemas.task import STaskAdd
 
 router = APIRouter(
-    prefix="/tasks"
+    prefix="/tasks",
+    tags=["tasks"]
 )
 @router.post("")
 async def create_task(
