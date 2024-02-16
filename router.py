@@ -16,7 +16,7 @@ async def create_task(
             "task_id": task_id}
 
 
-# @router.get("")
-# async def get_tasks():
-#     task = STask(name="Запиши эту задачу")
-#     return {"data": task}
+@router.get("")
+async def get_tasks():
+    tasks = await TaskRepository.get_all()
+    return {"tasks": tasks}
