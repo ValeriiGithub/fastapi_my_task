@@ -27,4 +27,3 @@ class TaskRepository:
             result = await session.execute(query)   # исполнить запрос
             task_models = result.scalars().all()    # объекты алхимии, к-е вернуться
             return task_models
-        
