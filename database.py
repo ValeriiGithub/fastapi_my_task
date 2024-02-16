@@ -15,8 +15,17 @@ class Model(DeclarativeBase):
     pass
 
 class TaskOrm(Model):
+    """Описание таблицы"""
     __tablename__ = "task"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
     description: Mapped[Optional[str]]
+
+
+async def create_tables():
+    """АСИНЗРОННАЯ Функция для создания таблицы"""
+    async with engine.begin() as connection:
+        await connection.run_sync(Model.metadata.create_all)
+
+
