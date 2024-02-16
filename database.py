@@ -8,11 +8,12 @@ engine = create_async_engine(
     echo=True
 )
 
-new_session = async_sessionmaker(engine, expire_on_commit=False)    # expire_on_commit - разбирается в курсе по алхимии
+new_session = async_sessionmaker(engine, expire_on_commit=False)  # expire_on_commit - разбирается в курсе по алхимии
 
 
 class Model(DeclarativeBase):
     pass
+
 
 class TaskOrm(Model):
     """Описание таблицы"""
@@ -24,8 +25,12 @@ class TaskOrm(Model):
 
 
 async def create_tables():
-    """АСИНЗРОННАЯ Функция для создания таблицы"""
+    """АСИНХРОННАЯ Функция для создания таблицы"""
     async with engine.begin() as connection:
         await connection.run_sync(Model.metadata.create_all)
 
 
+async def delete_tables():
+    """АСИНХРОННАЯ Функция для создания таблицы"""
+    async with engine.begin() as connection:
+        await connection.run_sync(Model.metadata.drop_all)
