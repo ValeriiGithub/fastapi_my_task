@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from typing_extensions import Annotated
 
 from repository import TaskRepository
-from schemas.task import STaskAdd
+from schemas.task import STaskAdd, STask
 
 router = APIRouter(
     prefix="/tasks",
@@ -18,6 +18,6 @@ async def create_task(
 
 
 @router.get("")
-async def get_tasks():
+async def get_tasks() -> STask:
     tasks = await TaskRepository.get_all()
-    return {"tasks": tasks}
+    return tasks
