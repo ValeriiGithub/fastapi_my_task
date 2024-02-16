@@ -4,8 +4,16 @@ from typing_extensions import Annotated
 from fastapi import FastAPI, Depends
 from schemas.task import STask, STaskAdd
 
+from contextlib import asynccontextmanager
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 tasks = []
 @app.post("/tasks")
