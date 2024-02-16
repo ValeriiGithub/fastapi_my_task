@@ -29,15 +29,4 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 tasks = []
-@app.post("/tasks")
-async def create_task(
-        task: Annotated[STaskAdd, Depends()],
-                      ):
-    tasks.append(task)
-    return {"ok": True}
 
-
-# @app.get("/tasks")
-# async def get_tasks():
-#     task = STask(name="Запиши эту задачу")
-#     return {"data": task}
