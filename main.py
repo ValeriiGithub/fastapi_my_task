@@ -2,6 +2,8 @@
 from typing_extensions import Annotated
 
 from fastapi import FastAPI, Depends
+
+from database import delete_tables, create_tables
 from schemas.task import STask, STaskAdd
 
 from contextlib import asynccontextmanager
@@ -9,8 +11,19 @@ from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-
+    """
+    После запуска приложения:
+    1 таблицы удаляются
+    2 таблицы создаются
+    :param app:
+    :return:
+    """
+    await delete_tables()
+    print("База очищена")
+    await create_tables()
+    print("База создана")
     yield
+    print("Выключение")
 
 
 app = FastAPI(lifespan=lifespan)
