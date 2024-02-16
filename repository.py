@@ -1,3 +1,5 @@
+from sqlalchemy import select
+
 from database import new_session, TaskOrm
 from schemas.task import STaskAdd
 
@@ -20,4 +22,9 @@ class TaskRepository:
 
     @classmethod
     async def get_all(cls):
-        ...
+        async with new_session() as session:
+            query = select(TaskOrm)                 # запрос
+            result = await session.execute(query)   # исполнить запрос
+            task_models = result.scalars().all()    # объекты алхимии, к-е вернуться
+            return task_models
+        
