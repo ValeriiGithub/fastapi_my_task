@@ -1,7 +1,8 @@
+from __future__ import annotations
 from sqlalchemy import select
 
 from database import new_session, TaskOrm
-from schemas.task import STaskAdd
+from schemas.task import STaskAdd, STask
 
 
 class TaskRepository:
@@ -21,9 +22,11 @@ class TaskRepository:
             return task.id
 
     @classmethod
-    async def get_all(cls):
+    async def get_all(cls) -> list[STask]:
         async with new_session() as session:
             query = select(TaskOrm)                 # запрос
             result = await session.execute(query)   # исполнить запрос
             task_models = result.scalars().all()    # объекты алхимии, к-е вернуться
+            # конвертация к pydantic схемам
+            task_schemas = [STask.model_validate(task_model) for task_model in task_models]
             return task_models
