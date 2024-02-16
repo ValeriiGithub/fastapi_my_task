@@ -1,10 +1,9 @@
 # from typing import Annotated    # с версии python 3.9
-from typing_extensions import Annotated
 
 from fastapi import FastAPI, Depends
 
 from database import delete_tables, create_tables
-from schemas.task import STask, STaskAdd
+from router import router as tasks_router
 
 from contextlib import asynccontextmanager
 
@@ -28,5 +27,6 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-tasks = []
+app.include_router(tasks_router)
+
 
