@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from fastapi import APIRouter, Depends
 from typing_extensions import Annotated
 
@@ -18,6 +20,6 @@ async def create_task(
 
 
 @router.get("")
-async def get_tasks() -> STask:
+async def get_tasks() -> list[STask]:
     tasks = await TaskRepository.get_all()
     return tasks
