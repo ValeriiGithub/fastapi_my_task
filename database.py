@@ -31,6 +31,6 @@ async def create_tables():
 
 
 async def delete_tables():
-    """АСИНХРОННАЯ Функция для создания таблицы"""
+    """АСИНХРОННАЯ Функция для удаления таблицы"""
     async with engine.begin() as connection:
         await connection.run_sync(Model.metadata.drop_all)
