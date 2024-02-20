@@ -19,8 +19,8 @@
 Для установки и запуска проекта вам потребуется Python 3.6 или выше. Клонируйте репозиторий, установите зависимости и запустите сервер FastAPI.
 
 ```bash
-git clone https://github.com/yourusername/yourrepository.git
-cd yourrepository
+git clone https://github.com/ValeriiGithub/fastapi_my_task.git
+cd fastapi_my_task
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
