@@ -5,6 +5,7 @@ from typing_extensions import Annotated     # импортируем Annotated �
 
 from repository import TaskRepository
 from schemas.task import STaskAdd, STask, STaskId
+from typing import List
 
 router = APIRouter(
     prefix="/tasks",
@@ -13,13 +14,12 @@ router = APIRouter(
 @router.post("")
 async def create_task(
         task: Annotated[STaskAdd, Depends()],
-):
+) -> STaskId:
     task_id = await TaskRepository.add_one(task)
-    return {"ok": True,
-            "task_id": task_id}
+    return {"ok": True, "task_id": task_id}
 
 
 @router.get("")
-async def get_tasks() -> list[STask]:
+async def get_tasks() -> List[STask]:
     tasks = await TaskRepository.get_all()
     return tasks
