@@ -12,5 +12,5 @@ class STask(STaskAdd):
 
 class STaskId(BaseModel):
     ok: bool = True
-    task_id = int
+    task_id: int
 
