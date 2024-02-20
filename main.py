@@ -1,6 +1,6 @@
 # from typing import Annotated    # с версии python 3.9
 
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 
 from database import delete_tables, create_tables
 from router import router as tasks_router
