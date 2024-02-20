@@ -1,8 +1,8 @@
-from __future__ import annotations
 from sqlalchemy import select
 
 from database import new_session, TaskOrm
 from schemas.task import STaskAdd, STask
+from typing import List
 
 
 class TaskRepository:
@@ -22,7 +22,7 @@ class TaskRepository:
             return task.id
 
     @classmethod
-    async def get_all(cls) -> list[STask]:
+    async def get_all(cls) -> List[STask]:
         async with new_session() as session:
             query = select(TaskOrm)                 # запрос
             result = await session.execute(query)   # исполнить запрос
